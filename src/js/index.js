@@ -16,28 +16,35 @@ import { Resume } from "./component/resume.js";
 import { Reset } from "./component/reset.js";
 let count = [0, 0, 0, 0, 0, 0];
 let flag = 0;
-const increasing = (array, flag) => {
+let timer = 0;
+let secondsElapsed = 0;
+const increasing = (array, flag, goal) => {
 	if (flag == 0) {
-		if (array[0] >= 9) {
+		if (secondsElapsed == timer && timer != 0) {
+			alert("Time its up, time to pay");
+			timer = 0;
+		}
+		if (array[0] > 9) {
 			array.forEach((element, index) => {
 				array[index] = 0;
 			});
 			alert("Max Number Reached: Restarting Counter");
 		}
 		count.forEach((element, index) => {
-			if (element >= 9) {
+			if (element >= 9 && array[0] < 10) {
 				if (index == 5) {
 					array[index] = -1;
-				} else {
+				} else if (array[0] != 9) {
 					array[index] = 0;
 				}
 				array[index - 1]++;
 			}
 		});
 		array[array.length - 1] += 1;
+		secondsElapsed++;
 	}
 };
-const stop = () => {
+const stop = number => {
 	flag = 1;
 	return flag;
 };
@@ -49,6 +56,14 @@ const reset = () => {
 	count.forEach((element, index) => {
 		count[index] = 0;
 	});
+};
+const setTimer = seconds => {
+	timer = seconds;
+	secondsElapsed = 0;
+	count.forEach((element, index) => {
+		count[index] = 0;
+	});
+	return timer;
 };
 const counter = () => {
 	increasing(count, flag);
@@ -62,11 +77,12 @@ const counter = () => {
 				fifth={count[4]}
 				sixth={count[5]}
 			/>
-			<div className="row justify-content-between m-1">
+			<div className="row justify-content-between m-1 bg-light p-2">
 				<Stop action={stop} />
 				<Resume action={resume} />
 				<Reset action={reset} />
 			</div>
+			<div className="row bg-dark" />
 		</div>,
 		document.querySelector("#app")
 	);
