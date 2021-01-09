@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import PropType from "prop-types";
 
-let count = [0, 0, 0, 0, 0, 0];
-
-export function Counter() {
+export const Counter = props => {
 	return (
 		<div
 			className="container text-light"
@@ -35,7 +34,7 @@ export function Counter() {
 							padding: "0.1em 0.1em 0.2em 0.1em",
 							backgroundColor: "#202020"
 						}}>
-						{count[0]}
+						{props.first}
 					</span>
 				</div>
 				<div
@@ -50,7 +49,7 @@ export function Counter() {
 							padding: "0.1em 0.1em 0.2em 0.1em",
 							backgroundColor: "#202020"
 						}}>
-						{count[1]}
+						{props.second}
 					</span>
 				</div>
 				<div
@@ -65,7 +64,7 @@ export function Counter() {
 							padding: "0.1em 0.1em 0.2em 0.1em",
 							backgroundColor: "#202020"
 						}}>
-						{count[2]}
+						{props.third}
 					</span>
 				</div>
 				<div
@@ -80,7 +79,7 @@ export function Counter() {
 							padding: "0.1em 0.1em 0.2em 0.1em",
 							backgroundColor: "#202020"
 						}}>
-						{count[3]}
+						{props.fourth}
 					</span>
 				</div>
 				<div
@@ -95,7 +94,7 @@ export function Counter() {
 							padding: "0.1em 0.1em 0.2em 0.1em",
 							backgroundColor: "#202020"
 						}}>
-						{count[4]}
+						{props.fifth}
 					</span>
 				</div>
 				<div
@@ -110,10 +109,18 @@ export function Counter() {
 							padding: "0.1em 0.1em 0.2em 0.1em",
 							backgroundColor: "#202020"
 						}}>
-						{count[5]}
+						{props.sixth}
 					</span>
 				</div>
 			</div>
 		</div>
 	);
-}
+};
+Counter.propTypes = {
+	first: PropType.number,
+	second: PropType.number,
+	third: PropType.number,
+	fourth: PropType.number,
+	fifth: PropType.number,
+	sixth: PropType.number
+};
