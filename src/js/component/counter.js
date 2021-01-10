@@ -34,7 +34,7 @@ export const Counter = props => {
 							padding: "0.1em 0.1em 0.2em 0.1em",
 							backgroundColor: "#202020"
 						}}>
-						{props.first}
+						{props.first % 10}
 					</span>
 				</div>
 				<div
@@ -49,7 +49,7 @@ export const Counter = props => {
 							padding: "0.1em 0.1em 0.2em 0.1em",
 							backgroundColor: "#202020"
 						}}>
-						{props.second}
+						{props.second % 10}
 					</span>
 				</div>
 				<div
@@ -64,7 +64,7 @@ export const Counter = props => {
 							padding: "0.1em 0.1em 0.2em 0.1em",
 							backgroundColor: "#202020"
 						}}>
-						{props.third}
+						{props.third % 10}
 					</span>
 				</div>
 				<div
@@ -79,7 +79,7 @@ export const Counter = props => {
 							padding: "0.1em 0.1em 0.2em 0.1em",
 							backgroundColor: "#202020"
 						}}>
-						{props.fourth}
+						{props.fourth % 10}
 					</span>
 				</div>
 				<div
@@ -94,7 +94,7 @@ export const Counter = props => {
 							padding: "0.1em 0.1em 0.2em 0.1em",
 							backgroundColor: "#202020"
 						}}>
-						{props.fifth}
+						{props.fifth % 10}
 					</span>
 				</div>
 				<div
@@ -109,7 +109,7 @@ export const Counter = props => {
 							padding: "0.1em 0.1em 0.2em 0.1em",
 							backgroundColor: "#202020"
 						}}>
-						{props.sixth}
+						{props.sixth % 10}
 					</span>
 				</div>
 			</div>

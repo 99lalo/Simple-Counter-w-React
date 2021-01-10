@@ -14,34 +14,16 @@ import { array } from "prop-types";
 import { Stop } from "./component/stop.js";
 import { Resume } from "./component/resume.js";
 import { Reset } from "./component/reset.js";
-let count = [0, 0, 0, 0, 0, 0];
+import { Timer } from "./component/timer.js";
 let flag = 0;
-let timer = 0;
+let timer = 100000000;
 let secondsElapsed = 0;
-const increasing = (array, flag, goal) => {
-	if (flag == 0) {
-		if (secondsElapsed == timer && timer != 0) {
-			alert("Time its up, time to pay");
-			timer = 0;
-		}
-		if (array[0] > 9) {
-			array.forEach((element, index) => {
-				array[index] = 0;
-			});
-			alert("Max Number Reached: Restarting Counter");
-		}
-		count.forEach((element, index) => {
-			if (element >= 9 && array[0] < 10) {
-				if (index == 5) {
-					array[index] = -1;
-				} else if (array[0] != 9) {
-					array[index] = 0;
-				}
-				array[index - 1]++;
-			}
-		});
-		array[array.length - 1] += 1;
+const increasing = (flag, goal) => {
+	if (flag == 0 && secondsElapsed != goal) {
 		secondsElapsed++;
+	} else if (secondsElapsed == goal) {
+		alert("Goal was reached! Please restart to keep counting!");
+		flag = 1;
 	}
 };
 const stop = number => {
@@ -53,36 +35,41 @@ const resume = () => {
 	return flag;
 };
 const reset = () => {
-	count.forEach((element, index) => {
-		count[index] = 0;
-	});
+	flag = 0;
+	secondsElapsed = 0;
+	timer = 100000000;
 };
 const setTimer = seconds => {
 	timer = seconds;
 	secondsElapsed = 0;
-	count.forEach((element, index) => {
-		count[index] = 0;
-	});
 	return timer;
 };
 const counter = () => {
-	increasing(count, flag);
+	const six = Math.floor(secondsElapsed / 100000);
+	const five = Math.floor(secondsElapsed / 10000);
+	const four = Math.floor(secondsElapsed / 1000);
+	const three = Math.floor(secondsElapsed / 100);
+	const two = Math.floor(secondsElapsed / 10);
+	const one = Math.floor(secondsElapsed / 1);
+	increasing(flag, timer);
 	ReactDOM.render(
 		<div className="container">
 			<Counter
-				first={count[0]}
-				second={count[1]}
-				third={count[2]}
-				fourth={count[3]}
-				fifth={count[4]}
-				sixth={count[5]}
+				first={six}
+				second={five}
+				third={four}
+				fourth={three}
+				fifth={two}
+				sixth={one}
 			/>
 			<div className="row justify-content-between m-1 bg-light p-2">
 				<Stop action={stop} />
 				<Resume action={resume} />
 				<Reset action={reset} />
 			</div>
-			<div className="row bg-dark" />
+			<div className="row bg-dark p-2">
+				<Timer action={setTimer} />
+			</div>
 		</div>,
 		document.querySelector("#app")
 	);
